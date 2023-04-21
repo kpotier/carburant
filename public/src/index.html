@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="index.css" rel="stylesheet" />
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <button id="list-popup" class="button">▤</button>
+  <button id="fav-popup" class="button">★</button>
+  <button id="selection-popup" class="button"></button>
+  <div id="selection" style="display:none">
+    <div>
+      <h1>What is your gas?</h1>
+      <form id="selection-form">
+        <select name="gas">
+          <option value="E10">E10</option>
+          <option value="E85">E85</option>
+          <option value="Gazole">Gazole</option>
+          <option value="GPLc">GPLc</option>
+          <option value="SP95">SP95</option>
+          <option value="SP98">SP98</option>
+        </select>
+        <input type="submit" value="Save" />
+      </form>
+    </div>
+  </div>
+  <div id="more-info" style="display:none">
+    <div>
+      <div id="more-info-top">
+        <h1>More info</h1>
+        <button id="more-info-close">✖</button>
+      </div>
+      <div id="more-info-container">
+
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <div id="map"></div>
+    <div id="list">
+      <button id="list-close">✖</button>
+      <div id="sort">
+        <button id="sort-distance">Distance <span id="sort-distance-arrow"></span></button>
+        <button id="sort-price">Price <span id="sort-price-arrow"></span></button>
+      </div>
+      <div id="items">
+        <div class="item">Loading...</div>
+      </div>
+    </div>
+  </div>
+  <div id="fav">
+    <button id="fav-close">✖</button>
+    <div id="sort">
+      <button id="sort-fav-distance">Distance <span id="sort-fav-distance-arrow"></span></button>
+      <button id="sort-fav-price">Price <span id="sort-fav-price-arrow"></span></button>
+    </div>
+    <div id="items-fav">
+      <div class="item">Loading...</div>
+    </div>
+  </div>
+</body>
+</html>
