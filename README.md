@@ -12,7 +12,7 @@ The carburant repository manages gas price data in the database using the API in
 
 3. Put this API key to `public/src/global.ts`
 
-4. `npm run build`
+4. `npm install && npm run build`
 
 5. `go run cmd/main.go`
 
