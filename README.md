@@ -2,7 +2,7 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/kpotier/carburant.svg)](https://pkg.go.dev/github.com/kpotier/carburant)
 
-The carburant repository manages gas price data in the database using the API instance. It provides functions for adding, updating, and retrieving gas price data.
+The carburant repository fetches gas price data from the French government API and enables users to view the evolution of gas prices for each service station. It manages the data for each station and allows users to compare gas prices and find the cheapest gas stations near their location.
 
 # Installation
 
