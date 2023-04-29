@@ -215,6 +215,8 @@ button:active {
 }
 
 #more-info > div {
+  max-height: 100vh;
+  overflow: auto;
   width: 80vw;
 }
 
