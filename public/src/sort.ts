@@ -188,7 +188,7 @@ export function toSort(where: HTMLElement, res: Result[], addBool = true) {
     buttonGo.innerText = "Go!";
     buttonGo.onclick = () => {
       window.open(
-        "http://maps.google.com/?q=" + r.address_rd + " " + r.address_cp,
+        "https://maps.google.com/?q=" + r.coords[0] + "," + r.coords[1],
         "_blank"
       );
     };
