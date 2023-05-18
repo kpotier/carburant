@@ -1,14 +1,5 @@
-import { properties } from "./global";
-import { getList } from "./sort";
-
-// Favorites
-const favLS = localStorage.getItem("favorites");
-if (favLS !== null) {
-  const l = favLS.split(",");
-  l.forEach((e) => {
-    properties.favorites.push(Number(e));
-  });
-}
+import { map, posDot, properties } from "./global";
+import { displayList, getList } from "./list";
 
 // Gas selection
 const selPopup = <HTMLElement>document.getElementById("selection-popup");
@@ -23,7 +14,13 @@ selPopup.innerText = properties.gas + " ▶";
 if (gasLS !== null) sel.style.display = "none";
 else sel.style.display = "flex";
 
-selForm.onsubmit = (e: Event) => {
+selPopup.onclick = (e: Event) => {
+  e.preventDefault();
+  sel.style.display = "flex";
+  return false;
+};
+
+selForm.onsubmit = async (e: Event) => {
   e.preventDefault();
   const form = new FormData(selForm);
   const g = form.get("gas")?.toString();
@@ -33,12 +30,17 @@ selForm.onsubmit = (e: Event) => {
     sel.style.display = "none";
     selPopup.innerText = properties.gas + " ▶";
   }
-  getList();
-  return false;
-};
-
-selPopup.onclick = (e: Event) => {
-  e.preventDefault();
-  sel.style.display = "flex";
+  const lngLat = posDot.getLngLat();
+  const res = await getList(lngLat.lng, lngLat.lat, properties.gas);
+  properties.res = res;
+  displayList(
+    <HTMLElement>document.getElementById("items"),
+    res,
+    properties.favorites,
+    properties.gas,
+    properties.sort,
+    map,
+    true
+  );
   return false;
 };

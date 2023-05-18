@@ -1,14 +1,18 @@
 import "./minireset.css";
 import "./index.css";
-import { map, posDot } from "./global";
-import { getList } from "./sort";
+import { map, posDot, properties } from "./global";
+import { displayList, getList } from "./list";
 import "./gas";
 import "./fav";
+import "./sort";
 
 // Position marker
 const list = <HTMLElement>document.getElementById("list");
 const listClose = <HTMLElement>document.getElementById("list-close");
 const listPopup = <HTMLElement>document.getElementById("list-popup");
+
+// Items
+const items = <HTMLElement>document.getElementById("items");
 
 listClose.onclick = () => {
   list.style.visibility = "";
@@ -23,16 +27,30 @@ map.on("load", function () {
   posDot.setLngLat(map.getCenter());
   posDot.addTo(map);
 
-  function setCenter(pos: GeolocationPosition) {
+  async function getListFromDot() {
+    const lngLat = posDot.getLngLat();
+    const res = await getList(lngLat.lng, lngLat.lat, properties.gas);
+    properties.res = res;
+    displayList(
+      items,
+      res,
+      properties.favorites,
+      properties.gas,
+      properties.sort,
+      map
+    );
+  }
+
+  async function setCenter(pos: GeolocationPosition) {
     map.easeTo({
       center: { lng: pos.coords.longitude, lat: pos.coords.latitude },
     });
     posDot.setLngLat([pos.coords.longitude, pos.coords.latitude]);
-    getList();
+    getListFromDot();
   }
 
-  posDot.on("dragend", getList);
-  navigator.geolocation.getCurrentPosition(setCenter, getList, {
+  posDot.on("dragend", getListFromDot);
+  navigator.geolocation.getCurrentPosition(setCenter, getListFromDot, {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0,
@@ -85,3 +103,10 @@ map.on("load", function () {
     list.style.visibility = "visible";
   });
 });
+
+// Moreinfo popup
+const moreInfo = <HTMLElement>document.getElementById("more-info");
+const mInfoClose = <HTMLElement>document.getElementById("more-info-close");
+mInfoClose.onclick = () => {
+  moreInfo.style.display = "none";
+};

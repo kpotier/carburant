@@ -1,7 +1,7 @@
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import * as maptilersdk from "@maptiler/sdk";
 
-maptilersdk.config.apiKey = "YOUR API KEY HERE";
+maptilersdk.config.apiKey = "IK39cbdmeK8aRWU74p9w";
 export const map = new maptilersdk.Map({
   container: "map",
   style: maptilersdk.MapStyle.STREETS,
